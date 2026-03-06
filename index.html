@@ -417,12 +417,12 @@
     </div>
 
     <div id="pantalla-inicio">
-        <h2>EIE TEST BOOK 1</h2>
+        <h2>EIE. TEST BOOK 1</h2>
         <div style="margin-bottom: 20px;">
             <p>Ingrese su Número de Carnet para comenzar:</p>
             <input type="text" id="input-carnet" class="input-carnet" placeholder="C.I. del Estudiante" onfocus="enFocoInput=true" onblur="enFocoInput=false">
         </div>
-        <p style="margin-bottom: 35px; color: #4b4b4b;">Preguntas 1-25: 20 seg. | Preguntas 26-50: Libre.<br>Tiempo total: 45 minutos.</p>
+        <p style="margin-bottom: 35px; color: #4b4b4b;"><h2>INSTRUCCIONES PARA EL EXAMEN</h2><br>Si dará el examen en un dispositivo móvil deberá activar la opción SITIO PARA COMPUTADORA y subir el volumen al maximo<br>Una vez presionado el botón de COMENZAR AHORA se iniciará el examen, empezará con la 1ra. Parte del Examen (Listening)<br>Preguntas del 1 al 25, escuchará audios y deberá elegir una opción de respuesta (A, B, C, D)<br>Teniendo un límite de tiempo de 20 segundos por pregunta<br>La 2da. Parte del Examen (Reading) del 26 al 50 no tiene límite de tiempo <br>La duración máxima del examen total es de 45 minutos<br>En el caso de que se pierda la señal el sistema esperará hasta que se vuelva a conectar a la Red de Internet y podrá continuar en la pregunta que se quedó.<br>Nota.- Al responder las 50 preguntas, tendrá la opción de verificar sus respuestas con el navegador en la parte izquierda presionando en el número de pregunta que quiera modificar su respuesta y para finalizar no se olvide de presionar GUARDAR Y ENVIAR</p>
         <button id="btnIniciar" class="btn-primario">Comenzar Ahora</button>
     </div>
 
@@ -591,7 +591,7 @@
 						aciertos++;
 					}
 				});
-				const notaActual = `${aciertos} / ${examenData.length}`;
+				const notaActual = `${aciertos * 2} / 100`;
 				const avanceTexto = `Vistas: ${preguntasVistas.size}, Resp: ${respondidas}`;
 				
 				try {
@@ -843,7 +843,8 @@
         msjCarga.innerText = "Guardando respuestas...";
 
         const aciertos = respuestas.filter((r, i) => r === _k[i]).length;
-        const notaFinal = `${aciertos} / ${examenData.length}`;
+		const notaSobre100 = aciertos * 2; // Multiplica cada acierto por 2
+		const notaFinal = `${notaSobre100} / 100`;
 
         try {
             const response = await fetch(SCRIPT_URL, {
@@ -903,8 +904,8 @@
 						NOTA OBTENIDA: ${nota}
 					</div>
 
-					<button onclick="location.reload()" class="btn-primario" style="margin-top: 10px; padding: 10px 25px; width: 100%;">
-						🏠 VOLVER AL INICIO
+					<button onclick="window.location.href='https://eievirtual2026.github.io/LOGIN/'" class="btn-primario" style="margin-top: 10px; padding: 10px 25px; width: 100%;">
+						🏠 VOLVER A INICIO
 					</button>
 				</div>
 			`;
